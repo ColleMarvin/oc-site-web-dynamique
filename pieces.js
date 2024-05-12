@@ -1,7 +1,24 @@
+// Récupération des articles et affichages dans le DOM
 const reponse = await fetch("pieces-autos.json");
 const pieces = await reponse.json();
 
-pieces.forEach(piece => {
+afficherArticles();
+
+// Fonction de tri
+const boutonTrier = document.querySelector('.btn-trier');
+boutonTrier.addEventListener('click', () => {
+    pieces.sort((a, b) => {
+        return a.prix - b.prix;
+    });
+    afficherArticles();
+});
+
+function afficherArticles() {
+
+    const fiches = document.querySelector('.fiches');
+    fiches.innerHTML = '';
+
+    pieces.forEach(piece => {
         const imageElement = document.createElement('img');
         imageElement.src = piece.image;
         const nomElement = document.createElement('h2');
@@ -23,6 +40,7 @@ pieces.forEach(piece => {
         article.appendChild(descriptionElement);
         article.appendChild(stockElement);
 
-        const fiches = document.querySelector('.fiches');
+        
         fiches.appendChild(article);
-});
+    });
+}
