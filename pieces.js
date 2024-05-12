@@ -1,22 +1,31 @@
 // Récupération des articles et affichages dans le DOM
 const reponse = await fetch("pieces-autos.json");
 const pieces = await reponse.json();
+let piecesCopy = Array.from(pieces);
 
 afficherArticles();
 
 // Fonction de tri
 const boutonTrier = document.querySelector('.btn-trier');
 boutonTrier.addEventListener('click', () => {
-    const piecesOrdonnees = Array.from(pieces);
-    piecesOrdonnees.sort((a, b) => {
+    piecesCopy.sort((a, b) => {
         return a.prix - b.prix;
     });
-    afficherArticles(piecesOrdonnees);
+    afficherArticles();
+});
+
+// Fonction de filtre
+const boutonFiltrer = document.querySelector('.btn-filtrer');
+boutonFiltrer.addEventListener('click', () => {
+    piecesCopy = piecesCopy.filter(piece => {
+        return piece.prix <= 35;
+    });
+    afficherArticles();
 });
 
 
 // Vide l'espace fiches et le rempli par les articles
-function afficherArticles(arr = pieces) {
+function afficherArticles(arr = piecesCopy) {
 
     const fiches = document.querySelector('.fiches');
     fiches.innerHTML = '';
