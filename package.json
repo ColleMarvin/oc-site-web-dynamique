@@ -1,7 +1,7 @@
 {
-  "name": "7697016-front-end.1",
+  "name": "oc-site-web-dynamique",
   "version": "1.0.0",
-  "description": "Support de Code pour le cours OpenClassrooms Creez des pages web dynamiques avec javascript",
+  "description": "Ma version du support de Code pour le cours OpenClassrooms Creez des pages web dynamiques avec javascript",
   "main": "pieces.js",
   "scripts": {
     "start":"http-server",
@@ -9,14 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1.git"
+    "url": "git+https://github.com/ColleMarvin/oc-site-web-dynamique"
   },
   "author": "OpenClassrooms",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1/issues"
-  },
-  "homepage": "https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1#readme",
+  "homepage": "https://github.com/ColleMarvin/oc-site-web-dynamique#readme",
   "dependencies": {
     "http-server": "^14.1.1"
   }
