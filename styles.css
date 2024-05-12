@@ -45,11 +45,31 @@ main {
 .fiches {
 	flex: 1;
 	margin: 8px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.25rem;
 }
+
+.fiches article {
+	border: 1px solid #000;
+	padding: 0.25rem;
+}
+
 .fiches img {
+	display: block;
+	margin: 0 auto;
 	max-width: 200px;
 }
+
+.fiches h2 {
+	text-align: center;
+}
+
 .fiches p {
 	margin-top: 4px;
 	margin-bottom: 4px;
+}
+
+article {
+	flex: 1;
 }
