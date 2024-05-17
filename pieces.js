@@ -1,9 +1,29 @@
 // Récupération des articles et affichages dans le DOM
-const reponse = await fetch("pieces-autos.json");
-const pieces = await reponse.json();
+const pieces = await fetch("pieces-autos.json").then(pieces => pieces.json());
 let piecesCopy = Array.from(pieces);
 
 afficherArticles();
+// // Garde que les noms des pièces
+// const nomPieces = pieces.map(element => element.nom);
+// for (let i = pieces.length - 1; i >= 0; i--) {
+//     if (pieces[i].prix > 35) {
+//         nomPieces.splice(i,1);
+//     }
+// }
+
+// console.log(nomPieces);
+
+
+
+// Gérer l'input de type range
+const inputPrixMax = document.querySelector("#prixMax");
+const outputPrixMax = document.querySelector("#prixMaxOutput");
+
+inputPrixMax.addEventListener("input", (event) => {
+    outputPrixMax.textContent = event.target.value;
+});
+
+
 
 // Fonction de tri
 const boutonTrier = document.querySelector('.btn-trier');
@@ -18,7 +38,8 @@ boutonTrier.addEventListener('click', () => {
 const boutonFiltrer = document.querySelector('.btn-filtrer');
 boutonFiltrer.addEventListener('click', () => {
     piecesCopy = piecesCopy.filter(piece => {
-        return piece.prix <= 35;
+        const valueMax = document.querySelector("#prixMax").value;
+        return piece.prix <= valueMax;
     });
     afficherArticles();
 });
