@@ -1,5 +1,5 @@
 // Récupération des articles et affichages dans le DOM
-const pieces = await fetch("pieces-autos.json").then(pieces => pieces.json());
+const pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
 let piecesCopy = Array.from(pieces);
 
 afficherArticles();
@@ -65,6 +65,9 @@ function afficherArticles(arr = piecesCopy) {
         descriptionElement.innerText = element.description ?? "Pas de description pour le moment.";
         const stockElement = document.createElement('p');
         stockElement.innerText = element.disponibilite ? "En stock" : "Rupture de stock";
+        const avisBouton = document.createElement('button');
+        avisBouton.dataset.id = element.id;
+        avisBouton.textContent = "Afficher les avis";
 
         const article = document.createElement('article');
         article.appendChild(imageElement);
@@ -73,6 +76,7 @@ function afficherArticles(arr = piecesCopy) {
         article.appendChild(categorieElement);
         article.appendChild(descriptionElement);
         article.appendChild(stockElement);
+        article.appendChild(avisBouton);
         
         fiches.appendChild(article);
     });
