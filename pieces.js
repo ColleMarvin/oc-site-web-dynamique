@@ -28,6 +28,7 @@ boutonFiltrer.addEventListener('click', () => {
 function afficherArticles(arr = piecesCopy) {
 
     const fiches = document.querySelector('.fiches');
+    // start with a clean slate
     fiches.innerHTML = '';
 
     arr.forEach(element => {
@@ -51,7 +52,6 @@ function afficherArticles(arr = piecesCopy) {
         article.appendChild(categorieElement);
         article.appendChild(descriptionElement);
         article.appendChild(stockElement);
-
         
         fiches.appendChild(article);
     });
