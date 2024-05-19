@@ -1,7 +1,14 @@
 import { ajoutListenerAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
 
 // Récupération des articles et affichages dans le DOM
-const pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
+let pieces = window.localStorage.getItem("pieces");
+if (pieces === null) {
+    pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
+    const valeurPieces = JSON.stringify(pieces);
+    window.localStorage.setItem("pieces", valeurPieces);
+} else {
+    pieces = JSON.parse(pieces);
+}
 let piecesCopy = Array.from(pieces);
 
 afficherArticles();
@@ -55,8 +62,14 @@ boutonFiltrer.addEventListener('click', () => {
     afficherArticles();
 });
 
+// Fonction de maj de pièces
+const boutonMettreAJour = document.querySelector('.btn-maj');
+boutonMettreAJour.addEventListener('click', () => {
+    window.localStorage.removeItem('pieces');
+});
 
-// Vide l'espace fiches et le rempli par les articles
+
+// Vide l'espace fiches et le remplir par les articles
 function afficherArticles(arr = piecesCopy) {
 
     const fiches = document.querySelector('.fiches');
