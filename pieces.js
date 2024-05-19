@@ -26,10 +26,18 @@ inputPrixMax.addEventListener("input", (event) => {
 
 
 // Fonction de tri
-const boutonTrier = document.querySelector('.btn-trier');
-boutonTrier.addEventListener('click', () => {
+const boutonTrierCroissant = document.querySelector('.btn-trier-croissant');
+boutonTrierCroissant.addEventListener('click', () => {
     piecesCopy.sort((a, b) => {
         return a.prix - b.prix;
+    });
+    afficherArticles();
+});
+
+const boutonTrierDecroissant = document.querySelector('.btn-trier-decroissant');
+boutonTrierDecroissant.addEventListener('click', () => {
+    piecesCopy.sort((a, b) => {
+        return b.prix - a.prix;
     });
     afficherArticles();
 });
