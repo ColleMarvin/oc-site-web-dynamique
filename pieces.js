@@ -1,10 +1,11 @@
-import { ajoutListenerAvis } from "./avis.js";
+import { ajoutListenerAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
 
 // Récupération des articles et affichages dans le DOM
 const pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
 let piecesCopy = Array.from(pieces);
 
 afficherArticles();
+ajoutListenerEnvoyerAvis();
 
 // // Garde que les noms des pièces
 // const nomPieces = pieces.map(element => element.nom);

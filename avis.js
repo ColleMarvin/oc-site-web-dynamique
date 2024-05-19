@@ -10,7 +10,7 @@ export function ajoutListenerAvis() {
                 const id = this.dataset.id;
                 const reponse = await fetch(`http://localhost:8081/pieces/${id}/avis`);
                 const avis = await reponse.json();
-                
+
                 avisDiv = document.createElement('div');
                 avisDiv.classList.add('avis');
                 avis.forEach(element => {
@@ -23,6 +23,27 @@ export function ajoutListenerAvis() {
             } else {
                 avisDiv.remove();
             }
+        });
+    });
+}
+
+export function ajoutListenerEnvoyerAvis() {
+    const formAvis = document.querySelector('.formulaire-avis');
+    formAvis.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const target = event.target;
+        const avis = {
+            pieceId: parseInt(target.querySelector('[name=piece-id]').value),
+            utilisateur: target.querySelector('[name=utilisateur]').value,
+            commentaire: target.querySelector('[name=commentaire]').value,
+        };
+        const chargeUtile = JSON.stringify(avis);
+
+        fetch("http://localhost:8081/avis", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: chargeUtile
         });
     });
 }
