@@ -36,6 +36,8 @@ inputPrixMax.addEventListener("input", (event) => {
 
 
 // Fonction de tri
+
+// Tri prix croissant
 const boutonTrierCroissant = document.querySelector('.btn-trier-croissant');
 boutonTrierCroissant.addEventListener('click', () => {
     piecesCopy.sort((a, b) => {
@@ -44,6 +46,7 @@ boutonTrierCroissant.addEventListener('click', () => {
     afficherArticles();
 });
 
+// Tri prix décroissant
 const boutonTrierDecroissant = document.querySelector('.btn-trier-decroissant');
 boutonTrierDecroissant.addEventListener('click', () => {
     piecesCopy.sort((a, b) => {
@@ -53,12 +56,21 @@ boutonTrierDecroissant.addEventListener('click', () => {
 });
 
 // Fonction de filtre
-const boutonFiltrer = document.querySelector('.btn-filtrer');
-boutonFiltrer.addEventListener('click', () => {
+
+// Filtrer par prix max
+const boutonFiltrerPrixMax = document.querySelector('.btn-filtrer-prix-max');
+boutonFiltrerPrixMax.addEventListener('click', () => {
     piecesCopy = piecesCopy.filter(piece => {
         const valueMax = document.querySelector("#prixMax").value;
         return piece.prix <= valueMax;
     });
+    afficherArticles();
+});
+
+// Filtrer pièces disponibles
+const boutonFiltrerDisponible = document.querySelector('.btn-filtrer-disponible');
+boutonFiltrerDisponible.addEventListener('click', () => {
+    piecesCopy = piecesCopy.filter(piece => piece.disponibilite);
     afficherArticles();
 });
 
