@@ -80,6 +80,13 @@ boutonMettreAJour.addEventListener('click', () => {
     window.localStorage.removeItem('pieces');
 });
 
+// Fonction de remise à zéro des filtres
+const boutonResetFiltres = document.querySelector('.btn-reset-filtres');
+boutonResetFiltres.addEventListener('click', () => {
+    piecesCopy = pieces;
+    afficherArticles();
+});
+
 
 // Vide l'espace fiches et le remplir par les articles
 function afficherArticles(arr = piecesCopy) {
