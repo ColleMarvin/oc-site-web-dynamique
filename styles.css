@@ -45,6 +45,9 @@ main {
 	display: block;
 	margin-bottom: 0.5rem;
 }
+.filtres label {
+	display: block;
+}
 
 .fiches {
 	flex: 1;
