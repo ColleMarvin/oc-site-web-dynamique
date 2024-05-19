@@ -5,6 +5,7 @@ const pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces
 let piecesCopy = Array.from(pieces);
 
 afficherArticles();
+
 // // Garde que les noms des pièces
 // const nomPieces = pieces.map(element => element.nom);
 // for (let i = pieces.length - 1; i >= 0; i--) {
@@ -14,7 +15,6 @@ afficherArticles();
 // }
 
 // console.log(nomPieces);
-
 
 
 // Gérer l'input de type range
