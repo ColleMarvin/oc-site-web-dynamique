@@ -1,3 +1,5 @@
+import { ajoutListenerAvis } from "./avis.js";
+
 // Récupération des articles et affichages dans le DOM
 const pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
 let piecesCopy = Array.from(pieces);
@@ -88,4 +90,6 @@ function afficherArticles(arr = piecesCopy) {
         
         fiches.appendChild(article);
     });
+
+    ajoutListenerAvis();
 }
