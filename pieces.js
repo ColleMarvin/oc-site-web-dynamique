@@ -34,7 +34,6 @@ inputPrixMax.addEventListener("input", (event) => {
 });
 
 
-
 // Fonction de tri
 
 // Tri prix croissant
@@ -55,6 +54,7 @@ boutonTrierDecroissant.addEventListener('click', () => {
     afficherArticles();
 });
 
+
 // Fonction de filtre
 
 // Filtrer par prix max
@@ -74,12 +74,6 @@ boutonFiltrerDisponible.addEventListener('click', () => {
     afficherArticles();
 });
 
-// Fonction de maj de pièces
-const boutonMettreAJour = document.querySelector('.btn-maj');
-boutonMettreAJour.addEventListener('click', () => {
-    window.localStorage.removeItem('pieces');
-});
-
 // Fonction de remise à zéro des filtres
 const boutonResetFiltres = document.querySelector('.btn-reset-filtres');
 boutonResetFiltres.addEventListener('click', () => {
@@ -88,7 +82,14 @@ boutonResetFiltres.addEventListener('click', () => {
 });
 
 
-// Vide l'espace fiches et le remplir par les articles
+// Fonction de maj de pièces
+const boutonMettreAJour = document.querySelector('.btn-maj');
+boutonMettreAJour.addEventListener('click', () => {
+    window.localStorage.removeItem('pieces');
+});
+
+
+// Vider l'espace fiches et le remplir par les articles
 function afficherArticles(arr = piecesCopy) {
 
     const fiches = document.querySelector('.fiches');
