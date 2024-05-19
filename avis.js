@@ -1,28 +1,46 @@
+function afficherAvis(avis, parent) {
+    let avisDiv = document.createElement('div');
+    avisDiv.classList.add('avis' + avis[0].pieceId);
+    avis.forEach(element => {
+        const p = document.createElement('p');
+        p.innerText = `${element.utilisateur}: ${element.commentaire}`;
+        avisDiv.appendChild(p);
+    });
+
+    parent.appendChild(avisDiv);
+}
+
+
 export function ajoutListenerAvis() {
     const piecesElements = document.querySelectorAll('.fiches article button');
 
     piecesElements.forEach(piece => {
+        let avis = window.localStorage.getItem("avis-" + piece.dataset.id);
+
+        if (avis) {
+            avis = JSON.parse(avis);
+            afficherAvis(avis, piece.parentElement);
+        }
+
         piece.addEventListener('click', async function () {
-            // Si les avis n'existe pas, on les récupère et les affiche
-            // Sinon, on les supprime
-            let avisDiv = document.querySelector('.avis');
-            if (!avisDiv) {
+            // Récupération avis pour la pièce
+            if (!avis) {
                 const id = this.dataset.id;
                 const reponse = await fetch(`http://localhost:8081/pieces/${id}/avis`);
-                const avis = await reponse.json();
+                avis = await reponse.json();
 
-                avisDiv = document.createElement('div');
-                avisDiv.classList.add('avis');
-                avis.forEach(element => {
-                    const p = document.createElement('p');
-                    p.innerText = `${element.utilisateur}: ${element.commentaire}`;
-                    avisDiv.appendChild(p);
-                });
-    
-                this.parentElement.appendChild(avisDiv);
-            } else {
-                avisDiv.remove();
+                // Stockage avis dans le localStorage
+                const valeurAvis = JSON.stringify(avis);
+                window.localStorage.setItem("avis-" + id, valeurAvis);
             }
+
+            // Si la div avis n'existe pas, on la créée et l'affiche
+            // Sinon, on la supprime
+            let avisDiv = document.querySelector('.avis' + piece.dataset.id);
+            if (!avisDiv)
+                afficherAvis(avis, piece.parentElement);
+            else
+                avisDiv.remove();
         });
     });
 }
