@@ -184,6 +184,18 @@
       "utilisateur": "Hugo Block",
       "commentaire": "Sint quidem quia ipsam quae.",
       "nbEtoiles": 5
+    },
+    {
+      "pieceId": 1,
+      "utilisateur": "Marvin Test",
+      "commentaire": "J'aime bien cette pièce",
+      "id": 21
+    },
+    {
+      "pieceId": 2,
+      "utilisateur": "Robert",
+      "commentaire": "J'aime bien cette pièce",
+      "id": 22
     }
   ]
 }
