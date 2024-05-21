@@ -1,4 +1,4 @@
-import { ajoutListenerAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+import { ajoutListenerAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
 
 // Récupération des articles et affichages dans le DOM
 let pieces = window.localStorage.getItem("pieces");
@@ -13,6 +13,7 @@ let piecesCopy = Array.from(pieces);
 
 afficherArticles();
 ajoutListenerEnvoyerAvis();
+afficherGraphiqueAvis();
 
 // // Garde que les noms des pièces
 // const nomPieces = pieces.map(element => element.nom);
