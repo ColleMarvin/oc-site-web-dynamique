@@ -66,6 +66,12 @@ export function ajoutListenerEnvoyerAvis() {
     });
 }
 
+
+// Calcul du nombre d'étoiles
+const avis = await fetch("http://localhost:8081/avis").then(avis => avis.json());
+const nb_commentaires = [0, 0, 0, 0, 0];
+avis.forEach(element => nb_commentaires[element.nbEtoiles - 1]++);
+
 export async function afficherGraphiqueAvis() {
     const labels = ['5', '4', '3', '2', '1'];
 
@@ -91,10 +97,3 @@ export async function afficherGraphiqueAvis() {
         config
     );
 }
-
-// Calcul du nombre d'étoiles
-const avis = await fetch("http://localhost:8081/avis").then(avis => avis.json());
-const nb_commentaires = [0, 0, 0, 0, 0];
-avis.forEach(element => nb_commentaires[element.nbEtoiles - 1]++);
-
-console.log(nb_commentaires);
