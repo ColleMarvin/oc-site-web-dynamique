@@ -196,6 +196,30 @@
       "utilisateur": "Robert",
       "commentaire": "J'aime bien cette pièce",
       "id": 22
+    },
+    {
+      "pieceId": 3,
+      "utilisateur": "Jean",
+      "commentaire": "C'est cool !",
+      "id": 23
+    },
+    {
+      "pieceId": 3,
+      "utilisateur": "Pierre",
+      "commentaire": "Mouais",
+      "id": 24
+    },
+    {
+      "pieceId": 3,
+      "utilisateur": "Jacques",
+      "commentaire": "Bof",
+      "id": 25
+    },
+    {
+      "pieceId": 4,
+      "utilisateur": "JJ",
+      "commentaire": "Bien",
+      "id": 26
     }
   ]
 }
