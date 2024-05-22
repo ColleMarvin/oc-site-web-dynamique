@@ -1,8 +1,10 @@
+/* global Chart */
+
 function afficherAvis(avis, parent) {
-    let avisDiv = document.createElement('div');
-    avisDiv.classList.add('avis' + avis[0].pieceId);
+    let avisDiv = document.createElement("div");
+    avisDiv.classList.add("avis" + avis[0].pieceId);
     avis.forEach(element => {
-        const p = document.createElement('p');
+        const p = document.createElement("p");
         p.innerText = `${element.utilisateur}: ${element.commentaire}`;
         avisDiv.appendChild(p);
     });
@@ -11,7 +13,7 @@ function afficherAvis(avis, parent) {
 }
 
 export function ajoutListenerAvis() {
-    const piecesElements = document.querySelectorAll('.fiches article button');
+    const piecesElements = document.querySelectorAll(".fiches article button");
 
     piecesElements.forEach(piece => {        
         let avis = window.localStorage.getItem("avis-" + piece.dataset.id);
@@ -19,7 +21,7 @@ export function ajoutListenerAvis() {
             afficherAvis(JSON.parse(avis), piece.parentElement);
         }
 
-        piece.addEventListener('click', async function () {
+        piece.addEventListener("click", async function () {
             avis = window.localStorage.getItem("avis-" + piece.dataset.id);
     
             if (avis) {
@@ -36,7 +38,7 @@ export function ajoutListenerAvis() {
 
             // Si la div avis n'existe pas, on la créée et l'affiche
             // Sinon, on la supprime
-            let avisDiv = document.querySelector('.avis' + piece.dataset.id);
+            let avisDiv = document.querySelector(".avis" + piece.dataset.id);
             if (!avisDiv)
                 afficherAvis(avis, piece.parentElement);
             else
@@ -46,16 +48,16 @@ export function ajoutListenerAvis() {
 }
 
 export function ajoutListenerEnvoyerAvis() {
-    const formAvis = document.querySelector('.formulaire-avis');
-    formAvis.addEventListener('submit', event => {
+    const formAvis = document.querySelector(".formulaire-avis");
+    formAvis.addEventListener("submit", event => {
         event.preventDefault();
 
         const target = event.target;
-        const pieceId = parseInt(target.querySelector('[name=piece-id]').value);
+        const pieceId = parseInt(target.querySelector("[name=piece-id]").value);
         const avis = {
             pieceId: pieceId,
-            utilisateur: target.querySelector('[name=utilisateur]').value,
-            commentaire: target.querySelector('[name=commentaire]').value,
+            utilisateur: target.querySelector("[name=utilisateur]").value,
+            commentaire: target.querySelector("[name=commentaire]").value,
         };
         const chargeUtile = JSON.stringify(avis);
 
@@ -67,7 +69,7 @@ export function ajoutListenerEnvoyerAvis() {
 
 
         // clear de l'avis dans le localStorage
-        window.localStorage.removeItem('avis-' + pieceId);
+        window.localStorage.removeItem("avis-" + pieceId);
     });
 }
 
@@ -79,7 +81,7 @@ avis.forEach(element => nb_commentaires[element.nbEtoiles - 1]++);
 
 // Affiche le graphique pour le nombre d'étoiles global
 export function afficherGraphiqueAvis() {
-    const labels = ['5', '4', '3', '2', '1'];
+    const labels = ["5", "4", "3", "2", "1"];
 
     const data = {
         labels: labels,
@@ -98,8 +100,8 @@ export function afficherGraphiqueAvis() {
         },
     };
 
-    const graphiqueAvis = new Chart(
-        document.getElementById('graphique-avis'),
+    new Chart(
+        document.getElementById("graphique-avis"),
         config
     );
 }
@@ -109,8 +111,8 @@ let pieces = window.localStorage.getItem("pieces");
 if (pieces) {
     pieces = JSON.parse(pieces);
 } else {
-    pieces = await fetch('http://localhost:8081/pieces').then(pieces => pieces.json());
-    window.localStorage.setItem('pieces', JSON.stringify(pieces));
+    pieces = await fetch("http://localhost:8081/pieces").then(pieces => pieces.json());
+    window.localStorage.setItem("pieces", JSON.stringify(pieces));
 }
 
 // Calcul le nombre de commentaire sur les pièces disponibles et non disponibles
@@ -125,7 +127,7 @@ avis.forEach(element => {
 
 // Affiche le graphique pour les pièces disponibles vs les pièces non disponibles
 export function afficherGraphiqueNbCommentPiecesDispo() {
-    const labels = ['Pièces disponibles', 'Pièces non disponibles'];
+    const labels = ["Pièces disponibles", "Pièces non disponibles"];
 
     const data = {
         labels: labels,
@@ -142,8 +144,8 @@ export function afficherGraphiqueNbCommentPiecesDispo() {
         data: data,
     };
 
-    const graphiqueNbCommentPiecesDispo = new Chart(
-        document.getElementById('graphique-nbCommentDispo'),
+    new Chart(
+        document.getElementById("graphique-nbCommentDispo"),
         config
     );
 }

@@ -39,8 +39,8 @@ inputPrixMax.addEventListener("input", (event) => {
 // Fonction de tri
 
 // Tri prix croissant
-const boutonTrierCroissant = document.querySelector('.btn-trier-croissant');
-boutonTrierCroissant.addEventListener('click', () => {
+const boutonTrierCroissant = document.querySelector(".btn-trier-croissant");
+boutonTrierCroissant.addEventListener("click", () => {
     piecesCopy.sort((a, b) => {
         return a.prix - b.prix;
     });
@@ -48,8 +48,8 @@ boutonTrierCroissant.addEventListener('click', () => {
 });
 
 // Tri prix décroissant
-const boutonTrierDecroissant = document.querySelector('.btn-trier-decroissant');
-boutonTrierDecroissant.addEventListener('click', () => {
+const boutonTrierDecroissant = document.querySelector(".btn-trier-decroissant");
+boutonTrierDecroissant.addEventListener("click", () => {
     piecesCopy.sort((a, b) => {
         return b.prix - a.prix;
     });
@@ -60,8 +60,8 @@ boutonTrierDecroissant.addEventListener('click', () => {
 // Fonction de filtre
 
 // Filtrer par prix max
-const boutonFiltrerPrixMax = document.querySelector('.btn-filtrer-prix-max');
-boutonFiltrerPrixMax.addEventListener('click', () => {
+const boutonFiltrerPrixMax = document.querySelector(".btn-filtrer-prix-max");
+boutonFiltrerPrixMax.addEventListener("click", () => {
     piecesCopy = piecesCopy.filter(piece => {
         const valueMax = document.querySelector("#prixMax").value;
         return piece.prix <= valueMax;
@@ -70,52 +70,52 @@ boutonFiltrerPrixMax.addEventListener('click', () => {
 });
 
 // Filtrer pièces disponibles
-const boutonFiltrerDisponible = document.querySelector('.btn-filtrer-disponible');
-boutonFiltrerDisponible.addEventListener('click', () => {
+const boutonFiltrerDisponible = document.querySelector(".btn-filtrer-disponible");
+boutonFiltrerDisponible.addEventListener("click", () => {
     piecesCopy = piecesCopy.filter(piece => piece.disponibilite);
     afficherArticles();
 });
 
 // Fonction de remise à zéro des filtres
-const boutonResetFiltres = document.querySelector('.btn-reset-filtres');
-boutonResetFiltres.addEventListener('click', () => {
+const boutonResetFiltres = document.querySelector(".btn-reset-filtres");
+boutonResetFiltres.addEventListener("click", () => {
     piecesCopy = pieces;
     afficherArticles();
 });
 
 
 // Fonction de maj de pièces
-const boutonMettreAJour = document.querySelector('.btn-maj');
-boutonMettreAJour.addEventListener('click', () => {
-    window.localStorage.removeItem('pieces');
+const boutonMettreAJour = document.querySelector(".btn-maj");
+boutonMettreAJour.addEventListener("click", () => {
+    window.localStorage.removeItem("pieces");
 });
 
 
 // Vider l'espace fiches et le remplir par les articles
 function afficherArticles(arr = piecesCopy) {
 
-    const fiches = document.querySelector('.fiches');
+    const fiches = document.querySelector(".fiches");
     // start with a clean slate
-    fiches.innerHTML = '';
+    fiches.innerHTML = "";
 
     arr.forEach(element => {
-        const imageElement = document.createElement('img');
+        const imageElement = document.createElement("img");
         imageElement.src = element.image;
-        const nomElement = document.createElement('h2');
+        const nomElement = document.createElement("h2");
         nomElement.innerText = element.nom;
-        const prixElement = document.createElement('p');
+        const prixElement = document.createElement("p");
         prixElement.innerText = `Prix : ${element.prix} € (${element.prix < 35 ? "€" : "€€€"})`;
-        const categorieElement = document.createElement('p');
+        const categorieElement = document.createElement("p");
         categorieElement.innerText = element.categorie ?? "(aucune catégorie)";
-        const descriptionElement = document.createElement('p');
+        const descriptionElement = document.createElement("p");
         descriptionElement.innerText = element.description ?? "Pas de description pour le moment.";
-        const stockElement = document.createElement('p');
+        const stockElement = document.createElement("p");
         stockElement.innerText = element.disponibilite ? "En stock" : "Rupture de stock";
-        const avisBouton = document.createElement('button');
+        const avisBouton = document.createElement("button");
         avisBouton.dataset.id = element.id;
         avisBouton.textContent = "Afficher les avis";
 
-        const article = document.createElement('article');
+        const article = document.createElement("article");
         article.appendChild(imageElement);
         article.appendChild(nomElement);
         article.appendChild(prixElement);
