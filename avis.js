@@ -10,7 +10,6 @@ function afficherAvis(avis, parent) {
     parent.appendChild(avisDiv);
 }
 
-
 export function ajoutListenerAvis() {
     const piecesElements = document.querySelectorAll('.fiches article button');
 
@@ -67,12 +66,13 @@ export function ajoutListenerEnvoyerAvis() {
 }
 
 
-// Calcul du nombre d'étoiles
+// Calcul du nombre d'étoiles global
 const avis = await fetch("http://localhost:8081/avis").then(avis => avis.json());
 const nb_commentaires = [0, 0, 0, 0, 0];
 avis.forEach(element => nb_commentaires[element.nbEtoiles - 1]++);
 
-export async function afficherGraphiqueAvis() {
+// Affiche le graphique pour le nombre d'étoiles global
+export function afficherGraphiqueAvis() {
     const labels = ['5', '4', '3', '2', '1'];
 
     const data = {
@@ -94,6 +94,50 @@ export async function afficherGraphiqueAvis() {
 
     const graphiqueAvis = new Chart(
         document.getElementById('graphique-avis'),
+        config
+    );
+}
+
+// Récupère les données de pièces
+let pieces = window.localStorage.getItem("pieces");
+if (pieces) {
+    pieces = JSON.parse(pieces);
+} else {
+    pieces = await fetch('http://localhost:8081/pieces').then(pieces => pieces.json());
+    window.localStorage.setItem('pieces', JSON.stringify(pieces));
+}
+
+// Calcul le nombre de commentaire sur les pièces disponibles et non disponibles
+const nbCommentPieceDispo = [0, 0];
+avis.forEach(element => {
+    if (element.commentaire) {
+        (pieces[element.pieceId - 1].disponibilite) ?
+            nbCommentPieceDispo[1]++ :
+            nbCommentPieceDispo[0]++;
+    }
+});
+
+// Affiche le graphique pour les pièces disponibles vs les pièces non disponibles
+export function afficherGraphiqueNbCommentPiecesDispo() {
+    const labels = ['Pièces disponibles', 'Pièces non disponibles'];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: "Nb commentaires",
+            data: nbCommentPieceDispo.reverse(),
+            backgroundColor: "#666A",
+            barPercentage: 0.5,
+        }],
+    };
+
+    const config = {
+        type: "bar",
+        data: data,
+    };
+
+    const graphiqueNbCommentPiecesDispo = new Chart(
+        document.getElementById('graphique-nbCommentDispo'),
         config
     );
 }
