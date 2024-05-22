@@ -13,17 +13,18 @@ function afficherAvis(avis, parent) {
 export function ajoutListenerAvis() {
     const piecesElements = document.querySelectorAll('.fiches article button');
 
-    piecesElements.forEach(piece => {
+    piecesElements.forEach(piece => {        
         let avis = window.localStorage.getItem("avis-" + piece.dataset.id);
-
         if (avis) {
-            avis = JSON.parse(avis);
-            afficherAvis(avis, piece.parentElement);
+            afficherAvis(JSON.parse(avis), piece.parentElement);
         }
 
         piece.addEventListener('click', async function () {
-            // Récupération avis pour la pièce
-            if (!avis) {
+            avis = window.localStorage.getItem("avis-" + piece.dataset.id);
+    
+            if (avis) {
+                avis = JSON.parse(avis);
+            } else {
                 const id = this.dataset.id;
                 const reponse = await fetch(`http://localhost:8081/pieces/${id}/avis`);
                 avis = await reponse.json();
@@ -50,8 +51,9 @@ export function ajoutListenerEnvoyerAvis() {
         event.preventDefault();
 
         const target = event.target;
+        const pieceId = parseInt(target.querySelector('[name=piece-id]').value);
         const avis = {
-            pieceId: parseInt(target.querySelector('[name=piece-id]').value),
+            pieceId: pieceId,
             utilisateur: target.querySelector('[name=utilisateur]').value,
             commentaire: target.querySelector('[name=commentaire]').value,
         };
@@ -62,6 +64,10 @@ export function ajoutListenerEnvoyerAvis() {
             headers: { "Content-Type": "application/json" },
             body: chargeUtile
         });
+
+
+        // clear de l'avis dans le localStorage
+        window.localStorage.removeItem('avis-' + pieceId);
     });
 }
 
